@@ -5,7 +5,7 @@ var express = require("express"),
 
     controllers = {
         site: require("./controllers/site"),
-        image: require("./controllers/image")
+        gallery: require("./controllers/gallery")
     },
 
     LISTEN_PORT = 3004;
@@ -22,7 +22,7 @@ app.post( "/gallery/create", controllers.gallery.create );
 
 app.get( "/gallery/:name/show", controllers.gallery.show );
 
-app.get( "/image/:index", controllers.image.fetch );
+//app.get( "/image/:index", controllers.image.fetch );
 
 app.listen( LISTEN_PORT );
 console.log( "Listening to localhost on port " + LISTEN_PORT );

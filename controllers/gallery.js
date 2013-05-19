@@ -1,5 +1,7 @@
 "use strict";
 
+// TODO: refactor most of this code into a model.
+
 var utils = require("../lib/utils"),
     redis = require("redis"),
     db = redis.createClient();
