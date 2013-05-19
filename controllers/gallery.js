@@ -4,6 +4,7 @@
 
 var utils = require("../lib/utils"),
     redis = require("redis"),
+    path = require("path"),
     db = redis.createClient();
 
 // Trailing _ because 'new' is a reserved word.
@@ -11,8 +12,32 @@ exports.new_ = function( req, res ) {
     res.render("gallery_new");
 };
 
+exports.index = function( req, res ) {
+    db.smembers( utils.gallery_list_key, function( err, meta_keys ) {
+        var multi;
+
+        if ( err || !meta_keys ) {
+            return res.send( 500, "Unable to retrieve gallery list." );
+        }
+
+        multi = db.multi();
+        meta_keys.forEach(function( meta_key ) {
+            multi.hgetall( meta_key );
+        });
+
+        multi.exec(function( err, galleries ) {
+            if ( req.query.format === "json" ) {
+                res.send( galleries );
+            } else {
+                res.render( "galleries", { galleries: galleries } );
+            }
+        });
+
+    });
+};
+
 exports.create = function( req, res ) {
-    var files = req.files["upload-files"],
+    var files = req.files.files,
         meta_key,
         files_key,
         gallery_url;
@@ -34,19 +59,21 @@ exports.create = function( req, res ) {
 
     db.hmset( meta_key, {
         title: req.body.name,
-        category: req.body.category,
+        category: req.body.category || "",
         url: gallery_url,
         files_key: files_key
     });
     db.sadd( utils.gallery_list_key, meta_key );
 
     files.forEach(function( file ) {
-        var image_key = utils.getImageKey( file.path );
+        var filename = path.basename( file.path ),
+            image_key = utils.getImageKey( filename );
 
         db.sadd( files_key, image_key );
         db.hmset( image_key, {
-            path: file.path,
+            filename: filename,
             title: file.name,
+            type: file.type,
             size: file.size
         });
     });
@@ -55,7 +82,7 @@ exports.create = function( req, res ) {
 };
 
 exports.show = function( req, res, next ) {
-    var gallery_name = decodeURIComponent( req.body.name ),
+    var gallery_name = decodeURIComponent( req.params.name ),
         meta_key;
 
     meta_key = utils.getGalleryMetaKey( gallery_name );
@@ -92,7 +119,12 @@ exports.show = function( req, res, next ) {
 
             multi.exec(function( err, gallery_files ) {
                 gallery.files = gallery_files;
-                res.send( gallery );
+
+                if ( req.query.format === "json" ) {
+                    res.send( gallery );
+                } else {
+                    res.render( "gallery", gallery );
+                }
             });
         });
     });

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Upload: Image Gallery</title>
+    <title>Create New Gallery</title>
     <link rel="stylesheet" href="css/main.css">
   </head>
 
@@ -24,7 +24,7 @@
 
     </header>
 
-    <h1>Image Gallery Uploader</h1>
+    <h1>Create New Gallery</h1>
 
     <div class="logged-out">
       <p>Log in to begin uploading.</p>
@@ -32,10 +32,12 @@
 
     <form class="logged-in" action="/gallery/create" enctype="multipart/form-data" method="POST">
       <h2>Create New Gallery</h2>
-      <label for="upload-galleryname">Name:</label>
-      <input name="upload-galleryname">
-      <label for="upload-files">Files:</label>
-      <input type="file" name="upload-files" multiple="multiple">
+      <label for="name">Name:</label>
+      <input name="name">
+      <br>
+      <label for="files">Files:</label>
+      <input type="file" name="files" multiple="multiple">
+      <br>
       <input type="submit" value="Upload">
     </form>
 

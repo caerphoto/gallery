@@ -1,0 +1,21 @@
+<% // super-simple HTML gallery index page, for search engines %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Galleries</title>
+  </head>
+
+  <body>
+    <h1>Galleries</h1>
+    <ul>
+      <% for ( var i = 0; i < galleries.length; i += 1 ) { %>
+      <% var g = galleries[i]; %>
+      <li><a href="<%- g.url %>"><%- g.title %></a></li>
+      <% } %>
+    </ul>
+
+  </body>
+</html>
+
+
+

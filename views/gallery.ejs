@@ -1,0 +1,22 @@
+<% // super-simple HTML gallery, for search engines %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gallery: <%= title %></title>
+  </head>
+
+  <body>
+    <a href="/galleries">Gallery index</a>
+
+    <h1><%= title %></h1>
+    <ul>
+      <% for ( var i = 0; i < files.length; i += 1 ) { %>
+      <% var f = files[i]; %>
+      <li><a href="<%- "/gallery_image/" + f.filename %>"><%- f.title %></a></li>
+      <% } %>
+    </ul>
+
+  </body>
+</html>
+
+
