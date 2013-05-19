@@ -5,6 +5,7 @@
 var utils = require("../lib/utils"),
     redis = require("redis"),
     path = require("path"),
+    im = require("imagemagick"),
     db = redis.createClient();
 
 // Trailing _ because 'new' is a reserved word.
@@ -67,6 +68,7 @@ exports.create = function( req, res ) {
 
     files.forEach(function( file ) {
         var filename = path.basename( file.path ),
+            thumb_path = utils.getImageThumbPath( filename ),
             image_key = utils.getImageKey( filename );
 
         db.sadd( files_key, image_key );
@@ -75,6 +77,22 @@ exports.create = function( req, res ) {
             title: file.name,
             type: file.type,
             size: file.size
+        });
+
+        im.resize({
+            srcPath: file.path,
+            dstPath: thumb_path,
+            quality: 0.7,
+            format: "jpg",
+            progressive: true,
+            width: 200,
+            height: 200,
+            strip: true,
+            sharpening: 0.2
+        }, function( err ) {
+            if ( err ) {
+                console.log( err );
+            }
         });
     });
 
@@ -118,6 +136,10 @@ exports.show = function( req, res, next ) {
             });
 
             multi.exec(function( err, gallery_files ) {
+                gallery_files.forEach(function( f ) {
+                    f.thumb_url = utils.getImageThumbURL( f.filename );
+                });
+
                 gallery.files = gallery_files;
 
                 if ( req.query.format === "json" ) {

@@ -9,7 +9,7 @@
     "redis": "0.8.x",
     "hiredis": "0.1.x",
     "connect-redis": "1.4.x",
-    "gm": "1.9.x"
+    "imagemagick": "0.1.x"
   }
 }
 

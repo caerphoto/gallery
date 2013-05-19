@@ -12,7 +12,8 @@
     <ul>
       <% for ( var i = 0; i < files.length; i += 1 ) { %>
       <% var f = files[i]; %>
-      <li><a href="<%- "/gallery_image/" + f.filename %>"><%- f.title %></a></li>
+      <li><a href="<%- "/gallery_image/" + f.filename %>"><img src="<%-
+        f.thumb_url %>"><%- f.title %></a></li>
       <% } %>
     </ul>
 

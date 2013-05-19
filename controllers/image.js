@@ -12,3 +12,12 @@ exports.fetch = function( req, res ) {
         res.sendfile( utils.getImagePath( filename ) );
     });
 };
+
+exports.fetchThumb = function( req, res ) {
+    var filename = req.params.filename;
+
+    db.hgetall( utils.getImageKey( filename ), function( err, image ) {
+        res.set( "Content-Type", image.type );
+        res.sendfile( utils.getImageThumbPath( filename ) );
+    });
+};
