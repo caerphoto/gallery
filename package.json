@@ -1,0 +1,15 @@
+{
+  "name": "caer-gallery",
+  "description": "Image gallery app for caer.me",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.x",
+    "ejs": "0.8.x",
+    "redis": "0.8.x",
+    "hiredis": "0.1.x",
+    "connect-redis": "1.4.x",
+    "gm": "1.9.x"
+  }
+}
+
