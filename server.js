@@ -15,7 +15,7 @@ app.set( "views", __dirname + "/views" );
 app.set( "view engine", "ejs" );
 app.set( "trust proxy", true );
 app.use( express.bodyParser({ uploadDir: "gallery_images/" }) );
-app.use( express.static( __dirname + "/gallery_images" ) );
+app.use( express.static( __dirname + "/public" ) );
 
 app.get( "/", controllers.site.index );
 

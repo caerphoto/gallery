@@ -3,20 +3,29 @@
 <html>
   <head>
     <title>Gallery: <%= title %></title>
+    <link rel="stylesheet" href="/css/main.css">
   </head>
 
   <body>
-    <a href="/galleries">Gallery index</a>
+    <a href="/galleries">&larr; Gallery index</a>
 
     <h1><%= title %></h1>
-    <ul>
+    <ul class="thumbnails">
       <% for ( var i = 0; i < files.length; i += 1 ) { %>
       <% var f = files[i]; %>
-      <li><a href="<%- "/gallery_image/" + f.filename %>"><img src="<%-
+      <li><a href="<%- "/gallery_image/" + f.filename %>" rel="quickslide"
+        title="<%- f.title %>"><img src="<%-
         f.thumb_url %>"><%- f.title %></a></li>
       <% } %>
     </ul>
 
+    <script>
+      QuickSlideConfig = {
+        use_dimmer: true,
+        show_caption: true,
+      };
+    </script>
+    <script src="/js/lib/quickslide-min.js"></script>
   </body>
 </html>
 

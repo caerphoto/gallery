@@ -8,8 +8,10 @@ exports.fetch = function( req, res ) {
     var filename = req.params.filename;
 
     db.hgetall( utils.getImageKey( filename ), function( err, image ) {
-        res.set( "Content-Type", image.type );
-        res.sendfile( utils.getImagePath( filename ) );
+        setTimeout(function() {
+            res.set( "Content-Type", image.type );
+            res.sendfile( utils.getImagePath( filename ) );
+        }, 2000 );
     });
 };
 
