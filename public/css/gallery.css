@@ -1,0 +1,192 @@
+html {
+    padding: 0;
+    margin: 0;
+    background: #555;
+    color: #eee;
+    font: 16px/1.6 "Tahoma";
+}
+
+body {
+    position: relative;
+    margin: 1em auto;
+    padding: 1em 3em;
+    max-width: 60em;
+    background: #333;
+    border: 1px solid #000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+body.logged-in .logged-out,
+body.logged-out .logged-in {
+    display: none;
+}
+
+h1, h2, h3, h4 {
+    font-weight: normal;
+}
+
+a {
+    color: #abc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #def;
+}
+
+a:visited {
+    color: #89a;
+}
+
+input {
+    font: inherit;
+    font-size: 100%;
+}
+
+#new-gallery-link {
+    position: absolute;
+    top: 1em;
+    right: 3em;
+}
+
+ul.gallery-list {
+    margin: 0 0 1em;
+    padding: 0;
+}
+
+ul.gallery-list > li {
+    list-style: none;
+    margin: 0 0 0.5em;
+    padding: 0;
+}
+
+ul.gallery-list > li.private {
+    background-image: url("/media/padlock-icon.png");
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+}
+
+form {
+    overflow: hidden;
+    margin-bottom: 1em;
+}
+
+form label,
+form input,
+form .hint {
+    display: block;
+    float: left;
+    margin-bottom: 1em;
+    padding: 0.2em 0.5em;
+    line-height: 1.25;
+    border: none;
+    vertical-align: middle;
+}
+
+form label {
+    width: 6em;
+    clear: both;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 15em;
+    border-radius: 3px;
+    box-shadow:
+        inset 1px 1px 2px rgba(0,0,0, 0.2);
+}
+
+form .hint {
+    margin-left: 1em;
+    font-size: 80%;
+}
+
+input[type="submit"],
+button,
+a.button {
+    clear: both;
+    border-radius: 4px;
+    background: #eee;
+    box-shadow:
+        inset 1px 1px 0 #fff,
+        inset -1px -1px 1px rgba(0,0,0,0.3),
+              0 1px 2px -2px rgba(0,0,0,0.4);
+    border-width: 1px;
+    border-style: solid;
+    border-color: #bbb #000 #000 #bbb;
+
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+button:hover,
+a.button:hover {
+    background: #fff;
+}
+
+ul.thumbnails {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+ul.thumbnails > li {
+    list-style: none;
+    margin: 0;
+    margin-right: 1em;
+    margin-bottom: 1.5em;
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+}
+
+ul.thumbnails > li img {
+    display: block;
+    position: relative;
+    margin-bottom: 0.5em;
+    box-shadow: 0 4px 7px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255, 0.1);
+}
+
+ul.thumbnails a:hover img {
+    border: 1px solid rgba(255,255,255, 0.4);
+}
+
+ul.thumbnails a:active img {
+    top: 2px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.3);
+}
+
+#quickslide-dimmer {
+    background: rgba(64,64,64,0.7);
+}
+
+#quickslide-popup-box {
+    padding: 1em;
+    background: #333;
+    border: 1px solid #000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    background-image: url("/media/loading-bar.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#quickslide-popup-box.loading {
+    width: 128px;
+    height: 15px;
+}
+
+#quickslide-popup-box.loaded {
+    background-image: none;
+}
+
+#quickslide-image {
+    border: 1px solid rgba(255,255,255, 0.1);
+}
+
+#quickslide-caption {
+    margin-top: 0.5em;
+    text-align: center;
+}
+

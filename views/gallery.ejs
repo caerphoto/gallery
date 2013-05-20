@@ -2,14 +2,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gallery: <%= title %></title>
-    <link rel="stylesheet" href="/css/main.css">
+    <title><%= title %> &middot; caer.me gallery</title>
+    <link rel="stylesheet" href="/css/gallery.css">
   </head>
 
-  <body>
+  <body class="<%= body_class %>">
     <a href="/galleries">&larr; Gallery index</a>
 
     <h1><%= title %></h1>
+
     <ul class="thumbnails">
       <% for ( var i = 0; i < files.length; i += 1 ) { %>
       <% var f = files[i]; %>

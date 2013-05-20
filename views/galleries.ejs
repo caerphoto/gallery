@@ -2,17 +2,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Galleries</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <title>Galleries &middot; caer.me</title>
+    <link rel="stylesheet" href="/css/gallery.css">
   </head>
 
   <body>
+    <a href="/gallery/new" id="new-gallery-link">+ new gallery</a>
+
     <h1>Galleries</h1>
-    <ul>
-      <% for ( var i = 0; i < galleries.length; i += 1 ) { %>
-      <% var g = galleries[i]; %>
+    <ul class="gallery-list">
+    <% for ( var i = 0; i < galleries.length; i += 1 ) { %>
+    <% var g = galleries[i]; %>
+      <% if ( g.password ) { %>
+      <li class="private"><a href="<%- g.url %>"><%- g.title %></a></li>
+      <% } else { %>
       <li><a href="<%- g.url %>"><%- g.title %></a></li>
       <% } %>
+    <% } %>
     </ul>
 
   </body>

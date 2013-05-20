@@ -10,7 +10,7 @@ var utils = require("../lib/utils"),
 
 // Trailing _ because 'new' is a reserved word.
 exports.new_ = function( req, res ) {
-    res.render("gallery_new");
+    res.render( "gallery_new" );
 };
 
 exports.index = function( req, res ) {
@@ -27,10 +27,18 @@ exports.index = function( req, res ) {
         });
 
         multi.exec(function( err, galleries ) {
+            galleries.sort(function( a, b ) {
+                var t1 = a.title.toLowerCase(),
+                    t2 = b.title.toLowerCase();
+                return t1 < t2 ? -1 : t1 > t2 ? 1 : 0;
+            });
+
             if ( req.query.format === "json" ) {
                 res.send( galleries );
             } else {
-                res.render( "galleries", { galleries: galleries } );
+                res.render( "galleries", {
+                    galleries: galleries
+                });
             }
         });
 
@@ -62,6 +70,7 @@ exports.create = function( req, res ) {
         title: req.body.name,
         category: req.body.category || "",
         url: gallery_url,
+        password: req.body.password,
         files_key: files_key
     });
     db.sadd( utils.gallery_list_key, meta_key );
@@ -116,6 +125,10 @@ exports.show = function( req, res, next ) {
             return false;
         }
 
+        if ( gallery.private && !req.session.logged_in ) {
+            return res.redirect( 401, "/galleries" );
+        }
+
         db.smembers( gallery.files_key, function( err, file_keys ) {
             var multi;
 
@@ -140,12 +153,13 @@ exports.show = function( req, res, next ) {
                     f.thumb_url = utils.getImageThumbURL( f.filename );
                 });
 
-                gallery.files = gallery_files;
-
                 if ( req.query.format === "json" ) {
                     res.send( gallery );
                 } else {
-                    res.render( "gallery", gallery );
+                    res.render( "gallery", {
+                        title: gallery.title,
+                        files: gallery_files
+                    });
                 }
             });
         });
