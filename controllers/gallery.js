@@ -159,6 +159,12 @@ exports.show = function( req, res, next ) {
                     f.thumb_url = utils.getImageThumbURL( f.filename );
                 });
 
+                gallery_files.sort(function( a, b ) {
+                    var t1 = a.title.toLowerCase(),
+                        t2 = b.title.toLowerCase();
+                    return t1 < t2 ? -1 : t1 > t2 ? 1 : 0;
+                });
+
                 if ( req.query.format === "json" ) {
                     res.send( gallery );
                 } else {
