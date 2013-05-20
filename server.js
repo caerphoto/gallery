@@ -55,7 +55,11 @@ app.get( "/galleries", controllers.gallery.index );
 app.get( "/gallery/new", admin_auth, controllers.gallery.new_ );
 app.post( "/gallery/create", uploadTimeout, controllers.gallery.create );
 
+// Same controller for both, since functionality is almost identical.
 app.get( "/gallery/:name/show", auth, controllers.gallery.show );
+app.get( "/gallery/:name/edit", admin_auth, controllers.gallery.show );
+
+app.post( "/gallery/:name/update", admin_auth, controllers.gallery.update );
 
 app.get( "/gallery_image/:filename.jpg", controllers.image.fetch );
 app.get( "/gallery_image/th/:filename", controllers.image.fetchThumb );

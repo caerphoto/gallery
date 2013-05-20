@@ -5,6 +5,7 @@
 var utils = require("../lib/utils"),
     redis = require("redis"),
     path = require("path"),
+    fs = require("fs"),
     im = require("imagemagick"),
     db = redis.createClient();
 
@@ -33,13 +34,36 @@ exports.index = function( req, res ) {
                 return t1 < t2 ? -1 : t1 > t2 ? 1 : 0;
             });
 
-            if ( req.query.format === "json" ) {
-                res.send( galleries );
-            } else {
-                res.render( "galleries", {
-                    galleries: galleries
+            multi = db.multi();
+
+            galleries.forEach(function( gallery ) {
+                gallery.url = utils.getGalleryURL( gallery.title );
+                multi.scard( gallery.files_key );
+            });
+
+
+            multi.exec(function( err, image_counts ){
+                if ( err ) {
+                    console.log( err );
+                    return res.send( 500, "Error retrieving image counts." );
+                }
+                if ( !image_counts ) {
+                    return res.send( 500, "Unable to retrieve image counts." );
+                }
+
+                // Assume galleries and image_counts are in the same order.
+                image_counts.forEach(function( count, index ) {
+                    galleries[index].count = count;
                 });
-            }
+
+                if ( req.query.format === "json" ) {
+                    res.send( galleries );
+                } else {
+                    res.render( "galleries", {
+                        galleries: galleries
+                    });
+                }
+            });
         });
 
     });
@@ -71,7 +95,6 @@ exports.create = function( req, res ) {
     db.hmset( meta_key, {
         title: req.body.name,
         category: req.body.category || "",
-        url: gallery_url,
         password: req.body.password,
         files_key: files_key
     });
@@ -155,6 +178,8 @@ exports.show = function( req, res, next ) {
             });
 
             multi.exec(function( err, gallery_files ) {
+                var view;
+
                 gallery_files.forEach(function( f ) {
                     f.thumb_url = utils.getImageThumbURL( f.filename );
                 });
@@ -165,15 +190,56 @@ exports.show = function( req, res, next ) {
                     return t1 < t2 ? -1 : t1 > t2 ? 1 : 0;
                 });
 
+                if ( /edit$/.test( req.path ) ) {
+                    view = "gallery_edit";
+                } else {
+                    view = "gallery";
+                }
+
                 if ( req.query.format === "json" ) {
                     res.send( gallery );
                 } else {
-                    res.render( "gallery", {
+                    res.render( view, {
                         title: gallery.title,
                         files: gallery_files
                     });
                 }
             });
         });
+    });
+};
+
+exports.update = function( req, res ) {
+    var gallery_name = decodeURIComponent( req.params.name ),
+        files_key = utils.getGalleryFilesKey( gallery_name ),
+        filenames = Object.keys( req.body ),
+        images,
+        multi = db.multi();
+
+    images = filenames.map(function( filename ) {
+        return {
+            key: utils.getImageKey( filename ),
+            filename: filename
+        };
+    });
+
+    images.forEach(function( image ) {
+        if ( req.body[ image.filename ].deleted ) {
+            multi.srem( files_key, image.key );
+            multi.del( image.key );
+            fs.unlink( utils.getImagePath( image.filename ) );
+            return;
+        }
+
+        multi.hset( image.key, "title", req.body[ image.filename ].title );
+    });
+
+    multi.exec(function( err ) {
+        if ( err ) {
+            console.log( err );
+            return res.send( 500, "Error updating gallery images." );
+        }
+
+        res.redirect( utils.getGalleryURL( gallery_name ) );
     });
 };
