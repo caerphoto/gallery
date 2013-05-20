@@ -2,8 +2,14 @@
 
 var express = require("express"),
     app = express(),
+
+    ONE_HOUR = 1000 * 60 * 60 * 60,
+    connectTimeout = require("connect-timeout"),
+    uploadTimeout = connectTimeout({ time: ONE_HOUR }),
+
     utils = require("./lib/utils"),
     secrets = require("./secrets"),
+
     admin_auth = express.basicAuth( secrets.admin_user, secrets.admin_pw ),
     auth,
 
@@ -47,7 +53,7 @@ auth = function( req, res, next ) {
 
 app.get( "/galleries", controllers.gallery.index );
 app.get( "/gallery/new", admin_auth, controllers.gallery.new_ );
-app.post( "/gallery/create", controllers.gallery.create );
+app.post( "/gallery/create", uploadTimeout, controllers.gallery.create );
 
 app.get( "/gallery/:name/show", auth, controllers.gallery.show );
 

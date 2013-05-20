@@ -8,6 +8,7 @@
     "ejs": "0.8.x",
     "redis": "0.8.x",
     "hiredis": "0.1.x",
+    "connect-timeout": "0.0.x",
     "connect-redis": "1.4.x",
     "imagemagick": "0.1.x"
   }

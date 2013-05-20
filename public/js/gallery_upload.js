@@ -15,6 +15,8 @@ $(function() {
 
         evt.preventDefault();
 
+        xhr.open(form.method, form.action + "?format=json", true);
+
         xhr.upload.onprogress = function( e ) {
             var progress,
                 percent,
@@ -43,9 +45,9 @@ $(function() {
 
                 $progress_bar.val( progress );
 
-                $progress_text.text([
+                $progress_text.html([
                     percent, "%",
-                    " (", loaded, " / ", total, units
+                    " &middot; ", loaded, " / ", total, units
                 ].join("") );
             } else {
                 $progress_bar.removeAttr("value");
@@ -68,7 +70,6 @@ $(function() {
         };
 
         $status.html("Uploading&hellip;");
-        xhr.open(form.method, form.action + "?format=json", true);
         xhr.send(form_data);
 
         elapsed_time = 0;
