@@ -228,6 +228,7 @@ exports.update = function( req, res ) {
             multi.srem( files_key, image.key );
             multi.del( image.key );
             fs.unlink( utils.getImagePath( image.filename ) );
+            fs.unlink( utils.getImageThumbPath( image.filename ) );
             return;
         }
 
