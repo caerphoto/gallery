@@ -41,7 +41,7 @@ auth = function( req, res, next ) {
     var meta_key = utils.getGalleryMetaKey( req.params.name );
 
     db.hgetall( meta_key, function( err, gallery ) {
-        if ( !gallery.password ) {
+        if ( !gallery || !gallery.password ) {
             return next();
         }
 
