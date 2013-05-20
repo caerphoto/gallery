@@ -55,6 +55,8 @@ exports.create = function( req, res ) {
         return res.send(400);
     }
 
+    req.connection.setTimeout(1000 * 60 * 60 * 60); // 1 hour
+
     gallery_url = utils.getGalleryURL( req.body.name );
 
     // meta_key is a hash containing the gallery metadata and files_key, which
@@ -105,7 +107,11 @@ exports.create = function( req, res ) {
         });
     });
 
-    res.redirect( gallery_url );
+    if ( req.query.format === "json" ) {
+        res.send( "/" + gallery_url );
+    } else {
+        res.redirect( gallery_url );
+    }
 };
 
 exports.show = function( req, res, next ) {
