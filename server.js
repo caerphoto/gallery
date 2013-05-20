@@ -25,7 +25,7 @@ app.post( "/gallery/create", controllers.gallery.create );
 
 app.get( "/gallery/:name/show", controllers.gallery.show );
 
-app.get( "/gallery_image/:filename", controllers.image.fetch );
+app.get( "/gallery_image/:filename.jpg", controllers.image.fetch );
 app.get( "/gallery_image/th/:filename", controllers.image.fetchThumb );
 
 app.listen( LISTEN_PORT );

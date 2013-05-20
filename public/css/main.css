@@ -28,7 +28,7 @@ a:hover {
     color: #def;
 }
 
-ul {
+ul.thumbnails {
     margin: 0;
     padding: 0;
     text-align: center;

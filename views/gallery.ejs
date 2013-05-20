@@ -13,7 +13,7 @@
     <ul class="thumbnails">
       <% for ( var i = 0; i < files.length; i += 1 ) { %>
       <% var f = files[i]; %>
-      <li><a href="<%- "/gallery_image/" + f.filename %>" rel="quickslide"
+      <li><a href="<%- "/gallery_image/" + f.filename %>.jpg" rel="quickslide"
         title="<%- f.title %>"><img src="<%-
         f.thumb_url %>"><%- f.title %></a></li>
       <% } %>
