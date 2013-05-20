@@ -46,9 +46,9 @@ $(function() {
                 $progress_bar.val( progress );
 
                 $progress_text.html([
-                    percent, "%",
-                    " &middot; ", loaded, " / ", total, units
-                ].join("") );
+                    percent, "%,",
+                    loaded, "/", total, units
+                ].join(" ") );
             } else {
                 $progress_bar.removeAttr("value");
                 $progress_text.text("?");
@@ -56,17 +56,20 @@ $(function() {
         };
 
         xhr.onerror = function( e ) {
-            $("#status").text("Oh dear, something went wrong :(");
+            $status.addClass("error");
+            $status.text("Oh dear, something went wrong :(");
             console.log( e );
         };
 
         xhr.onload = function() {
             var url = this.responseText;
-            console.log(url);
-            $("#status").html("Upload complete! Loading new gallery&hellip;");
+
+            $status.addClass("success");
+            $status.html("Upload complete! Loading new gallery&hellip;");
+
             setTimeout(function() {
                 window.location.assign( url );
-            }, 3000 );
+            }, 1000 );
         };
 
         $status.html("Uploading&hellip;");

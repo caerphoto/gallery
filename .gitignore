@@ -1,2 +1,5 @@
 gallery_images/*
 node_modules/
+public/js/lib/
+public/css/base.css
+secrets.js

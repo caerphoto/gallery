@@ -2,10 +2,14 @@
 <html>
   <head>
     <title>Create New Gallery</title>
+    <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/gallery.css">
+    <script type="text/javascript" src="//use.typekit.net/hge8nui.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
 
   <body>
+    <div id="main">
     <a href="/galleries">&larr; Gallery index</a>
 
     <h1>Create New Gallery</h1>
@@ -27,16 +31,15 @@
       <input type="submit" value="Upload">
     </form>
 
-    <p><span id="status">Waiting to upload&hellip;</span><br>
+    <p id="upload-status"><span id="status">Waiting to upload&hellip;</span><br>
     <progress id="upload-progress-bar" min="0" max="1"></progress>
     <span id="upload-progress-text">?</span><br>
     Elapsed time: <span id="upload-elapsed-time">0:00</span>
     </p>
 
-
-    <script src="/js/lib/jquery-2.0.0.min.js"></script>
-    <script src="/js/gallery_upload.js"></script>
-
+  </div>
+  <script src="/js/lib/jquery-2.0.0.min.js"></script>
+  <script src="/js/gallery_upload.js"></script>
   </body>
 </html>
 

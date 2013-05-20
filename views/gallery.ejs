@@ -3,10 +3,15 @@
 <html>
   <head>
     <title><%= title %> &middot; caer.me gallery</title>
+
+    <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/gallery.css">
+    <script type="text/javascript" src="//use.typekit.net/hge8nui.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
 
   <body>
+    <div id="main" class="gallery">
     <a href="/galleries">&larr; Gallery index</a>
 
     <h1><%= title %></h1>
@@ -19,6 +24,8 @@
         f.thumb_url %>"><%- f.title %></a></li>
       <% } %>
     </ul>
+
+    </div>
 
     <script>
       QuickSlideConfig = {

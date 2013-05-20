@@ -1,19 +1,20 @@
 html {
-    padding: 0;
-    margin: 0;
     background: #555;
-    color: #eee;
-    font: 16px/1.6 "Tahoma";
 }
 
 body {
-    position: relative;
-    margin: 1em auto;
-    padding: 1em 3em 2em;
-    max-width: 60em;
+    background: none;
+    color: #eee;
+}
+
+#main {
     background: #333;
     border: 1px solid #000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#main.gallery {
+    max-width: none;
+    margin: 1em;
 }
 
 body.logged-in .logged-out,
@@ -21,8 +22,11 @@ body.logged-out .logged-in {
     display: none;
 }
 
-h1, h2, h3, h4 {
-    font-weight: normal;
+h1 {
+    color: #ddd;
+    text-shadow:
+        0 -1px 0 #444,
+        0 -2px 3px rgba(255,255,255, 0.2);
 }
 
 a {
@@ -30,12 +34,12 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    color: #def;
-}
-
 a:visited {
     color: #89a;
+}
+
+a:hover {
+    color: #def;
 }
 
 input {
@@ -49,15 +53,11 @@ input {
     right: 3em;
 }
 
-ul.gallery-list {
-    margin: 0 0 1em;
-    padding: 0;
+li:before {
+    content: "";
 }
 
 ul.gallery-list > li {
-    list-style: none;
-    margin: 0 0 0.5em;
-    padding: 0;
     padding-left: 20px;
 }
 
@@ -125,9 +125,21 @@ a.button:hover {
     background: #fff;
 }
 
+#upload-status {
+    line-height: 2;
+}
+
 #upload-progress-bar {
     width: 20em;
     margin-right: 1em;
+}
+
+.error {
+    color: #ef2222;
+}
+
+.success {
+    color: #22c022;
 }
 
 ul.thumbnails {
