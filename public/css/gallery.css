@@ -125,6 +125,11 @@ a.button:hover {
     background: #fff;
 }
 
+#upload-progress-bar {
+    width: 20em;
+    margin-right: 1em;
+}
+
 ul.thumbnails {
     margin: 0;
     padding: 0;

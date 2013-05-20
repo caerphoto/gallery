@@ -16,12 +16,37 @@ $(function() {
         evt.preventDefault();
 
         xhr.upload.onprogress = function( e ) {
-            var progress;
+            var progress,
+                percent,
+                loaded,
+                total,
+                B = 1024,
+                KB = B * 1024,
+                units;
 
             if ( e.lengthComputable ) {
                 progress = ( e.loaded / e.total );
+                percent = Math.round( progress * 10000 ) / 100;
+                if ( e.total < B ) {
+                    loaded = e.loaded;
+                    total = e.total;
+                    units = "B";
+                } else if ( e.total < KB ) {
+                    loaded = (e.loaded / B ).toFixed(2);
+                    total = (e.total / B ).toFixed(2);
+                    units = "KB";
+                } else {
+                    loaded = (e.loaded / KB ).toFixed(2);
+                    total = (e.total / KB ).toFixed(2);
+                    units = "MB";
+                }
+
                 $progress_bar.val( progress );
-                $progress_text.text( Math.round( progress * 10000 ) / 100 );
+
+                $progress_text.text([
+                    percent, "%",
+                    " (", loaded, " / ", total, units
+                ].join("") );
             } else {
                 $progress_bar.removeAttr("value");
                 $progress_text.text("?");
