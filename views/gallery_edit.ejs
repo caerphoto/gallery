@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>edit: <%= title %> &middot; caer.me gallery</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/gallery.css">
+    <script type="text/javascript" src="//use.typekit.net/hge8nui.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  </head>
+
+  <body>
+    <div id="main" class="gallery">
+    <a href="/galleries">&larr; Gallery index</a>
+
+    <h1><%= title %></h1>
+
+    <form action="/gallery/<%= title %>/update" method="POST">
+      <ul class="thumbnails">
+        <% for ( var i = 0; i < files.length; i += 1 ) { %>
+        <% var f = files[i]; %>
+        <li class="edit">
+          <input type="checkbox" id="delete-<%= f.filename %>"
+            name="<%= f.filename %>[deleted]">
+          <label for="delete-<%= f.filename %>"></label>
+
+          <img src="<%- f.thumb_url %>">
+
+          <input type="text" name="<%= f.filename %>[title]" value="<%= f.title %>">
+        </li>
+        <% } %>
+      </ul>
+
+      <input type="submit" value="Save">
+    </form>
+
+    </div>
+
+    <script>
+      QuickSlideConfig = {
+        use_dimmer: true,
+        show_caption: true,
+      };
+    </script>
+    <script src="/js/lib/quickslide-min.js"></script>
+  </body>
+</html>
+
+
