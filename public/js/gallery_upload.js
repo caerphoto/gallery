@@ -15,6 +15,8 @@ $(function() {
 
         evt.preventDefault();
 
+        // TODO: implement uploading of files individually, several at a time
+
         xhr.open(form.method, form.action + "?format=json", true);
 
         xhr.upload.onprogress = function( e ) {
@@ -28,7 +30,7 @@ $(function() {
 
             if ( e.lengthComputable ) {
                 progress = ( e.loaded / e.total );
-                percent = Math.round( progress * 10000 ) / 100;
+                percent = ( progress * 100 ).toFixed(1);
                 if ( e.total < B ) {
                     loaded = e.loaded;
                     total = e.total;
@@ -46,7 +48,7 @@ $(function() {
                 $progress_bar.val( progress );
 
                 $progress_text.html([
-                    percent, "%,",
+                    percent + "%,",
                     loaded, "/", total, units
                 ].join(" ") );
             } else {

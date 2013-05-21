@@ -17,7 +17,7 @@
     <ul class="gallery-list">
     <% for ( var i = 0; i < galleries.length; i += 1 ) { %>
     <% var g = galleries[i]; %>
-      <% if ( g.password ) { %>
+      <% if ( g.private ) { %>
       <li class="private"><a href="<%- g.url %>"><%- g.title %></a></li>
       <% } else { %>
       <li><a href="<%- g.url %>"><%- g.title %></a>

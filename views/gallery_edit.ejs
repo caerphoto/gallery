@@ -18,8 +18,8 @@
 
     <form action="/gallery/<%= title %>/update" method="POST">
       <ul class="thumbnails">
-        <% for ( var i = 0; i < files.length; i += 1 ) { %>
-        <% var f = files[i]; %>
+        <% for ( var i = 0; i < images.length; i += 1 ) { %>
+        <% var f = images[i]; %>
         <li class="edit">
           <input type="checkbox" id="delete-<%= f.filename %>"
             name="<%= f.filename %>[deleted]">

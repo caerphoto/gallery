@@ -56,6 +56,16 @@ exports.index = function( req, res ) {
                     galleries[index].count = count;
                 });
 
+                galleries = galleries.map(function( gallery ) {
+                    return {
+                        title: gallery.title,
+                        category: gallery.category,
+                        url: gallery.url,
+                        private: !!gallery.password,
+                        count: gallery.password ? null : gallery.count
+                    };
+                });
+
                 if ( req.query.format === "json" ) {
                     res.send( galleries );
                 } else {
@@ -178,7 +188,7 @@ exports.show = function( req, res, next ) {
             });
 
             multi.exec(function( err, gallery_files ) {
-                var view;
+                var template, view;
 
                 gallery_files.forEach(function( f ) {
                     f.thumb_url = utils.getImageThumbURL( f.filename );
@@ -191,18 +201,22 @@ exports.show = function( req, res, next ) {
                 });
 
                 if ( /edit$/.test( req.path ) ) {
-                    view = "gallery_edit";
+                    template = "gallery_edit";
                 } else {
-                    view = "gallery";
+                    template = "gallery";
                 }
 
+                view = {
+                    title: gallery.title,
+                    category: gallery.category,
+                    edit_url: utils.getGalleryURL( gallery.title, true ),
+                    images: gallery_files
+                };
+
                 if ( req.query.format === "json" ) {
-                    res.send( gallery );
+                    res.send( view );
                 } else {
-                    res.render( view, {
-                        title: gallery.title,
-                        files: gallery_files
-                    });
+                    res.render( template, view );
                 }
             });
         });
