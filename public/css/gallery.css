@@ -1,16 +1,16 @@
 html {
-    background: #555;
+    background: #333;
 }
 
 body {
-    background: none;
     color: #eee;
+    background: none;
 }
 
 #main {
-    background: #333;
-    border: 1px solid #000;
     position: relative;
+    background: none;
+    padding: 1em 3em;
 }
 
 #main.gallery {
@@ -28,6 +28,7 @@ h1 {
     text-shadow:
         0 -1px 0 #444,
         0 -2px 3px rgba(255,255,255, 0.2);
+    display: block;
 }
 
 a {
@@ -60,6 +61,7 @@ li:before {
 
 ul.gallery-list > li {
     padding-left: 20px;
+    list-style: none;
 }
 
 ul.gallery-list > li.private {
@@ -230,7 +232,7 @@ ul.thumbnails a:active img {
 }
 
 #quickslide-dimmer {
-    background: rgba(64,64,64,0.7);
+    background: rgba(0,0,0,0.7);
 }
 
 #quickslide-popup-box {
