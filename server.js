@@ -51,7 +51,7 @@ auth = function( req, res, next ) {
     });
 };
 
-app.get( "/galleries", controllers.gallery.index );
+app.get( "/", controllers.gallery.index );
 app.get( "/gallery/new", admin_auth, controllers.gallery.new_ );
 app.post( "/gallery/create", uploadTimeout, controllers.gallery.create );
 
