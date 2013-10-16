@@ -6,15 +6,15 @@
 
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/gallery.css">
-    <script type="text/javascript" src="//use.typekit.net/hge8nui.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,400,700,300' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
     <div id="main" class="gallery">
     <a href="<%= edit_url %>" class="admin-function">edit gallery</a>
 
-    <h1><a href="/">caer.me</a> . <a href="/galleries">galleries</a> . <%= title %></h1>
+    <h1><%= title %> <a href="/galleries">photo</a> <a href="/">caer.me</a></h1>
+
 
     <ul class="thumbnails">
       <% for ( var i = 0; i < images.length; i += 1 ) { %>
