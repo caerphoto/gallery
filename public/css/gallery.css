@@ -4,13 +4,10 @@ html {
 
 body {
     color: #eee;
-    background: none;
 }
 
 #main {
     position: relative;
-    background: none;
-    padding: 1em 3em;
 }
 
 #main.gallery {
@@ -28,7 +25,12 @@ h1 {
     text-shadow:
         0 -1px 0 #444,
         0 -2px 3px rgba(255,255,255, 0.2);
-    display: block;
+}
+
+.gallery h1 {
+    margin: 0 0 1.8em;
+    padding: 0;
+    background: none;
 }
 
 a {
