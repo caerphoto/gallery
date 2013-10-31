@@ -155,12 +155,12 @@ exports.show = function( req, res, next ) {
 
     db.hgetall( meta_key , function( err, gallery ) {
         if ( err ) {
-            console.log( err );
+            console.error( err );
             return next( err );
         }
 
         if ( !gallery ) {
-            console.log("No gallery data returned.");
+            console.error("No gallery data returned.");
             return false;
         }
 
@@ -172,12 +172,12 @@ exports.show = function( req, res, next ) {
             var multi;
 
             if ( err ) {
-                console.log( err );
+                console.error( err );
                 return next( err );
             }
 
             if ( !file_keys ) {
-                console.log("No file keys returned.");
+                console.error("No file keys returned.");
                 return false;
             }
 
@@ -210,7 +210,7 @@ exports.show = function( req, res, next ) {
                     title: gallery.title,
                     category: gallery.category,
                     edit_url: utils.getGalleryURL( gallery.title, true ),
-                    images: gallery_files
+                    images: JSON.stringify(gallery_files)
                 };
 
                 if ( req.query.format === "json" ) {
