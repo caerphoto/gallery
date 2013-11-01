@@ -312,7 +312,7 @@ ul.thumbnails a:active img {
 }
 
 #prev_image {
-    left: 0;
+    left: 1em;
 }
 
 #next_image {
