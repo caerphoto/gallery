@@ -9,6 +9,7 @@ exports.fetch = function( req, res ) {
 
     db.hgetall( utils.getImageKey( filename ), function( err, image ) {
         res.set( "Content-Type", image.type );
+        res.set( "Cache-Control", "public, max-age=604800" ); // 1 week
         res.sendfile( utils.getImagePath( filename ) );
     });
 };
@@ -18,6 +19,7 @@ exports.fetchThumb = function( req, res ) {
 
     db.hgetall( utils.getImageKey( filename ), function( err, image ) {
         res.set( "Content-Type", image.type );
+        res.set( "Cache-Control", "public, max-age=604800" ); // 1 week
         res.sendfile( utils.getImageThumbPath( filename ) );
     });
 };
