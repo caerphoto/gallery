@@ -35,7 +35,7 @@ $(function () {
         scale = wh / nh;
         sw = nw * scale;
 
-        if (sw > ww) {
+        if (sw > ww || nw > ww) {
             constrainWidth = true;
         }
 
