@@ -19,6 +19,8 @@ $(function () {
         $fullImage.attr("src", this.href);
         $thumbnails.children().removeClass("selected");
         $(this).parent().addClass("selected");
+        $imageWrapper.addClass("loading");
+
 
         evt.preventDefault();
     });
@@ -48,6 +50,7 @@ $(function () {
 
     $fullImage.on("load", function () {
         fitImageToWrapper();
+        $imageWrapper.removeClass("loading");
     });
 
     showNextImage = function (back) {
