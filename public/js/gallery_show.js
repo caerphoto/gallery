@@ -62,7 +62,7 @@ $(function () {
         }
 
         $to.children().trigger("click");
-        $thumbnails.scrollTop($to.position().top);
+        $to[0].scrollIntoView(false);
     };
 
     $w.on("keyup", function (evt) {
