@@ -326,7 +326,7 @@ ul.thumbnails a:active img {
     font: inherit;
     color: rgba(255,255,255,0.4);
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    font-size: 2em;
+    font-size: 4em;
 }
 
 #image_wrapper button:hover {
