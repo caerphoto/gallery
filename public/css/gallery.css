@@ -165,8 +165,9 @@ ul.thumbnails {
     top: 5em;
     left: 0;
     bottom: 0;
-    overflow-y: scroll;
     overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     font-size: 0.8em;
 }
 
