@@ -5,10 +5,13 @@ $(function () {
     var $thumbnails = $("#thumbnails"),
         $imageWrapper = $("#image_wrapper"),
         $fullImage = $("#full_image"),
+        fullImage = $fullImage.get(0),
         $w = $(window),
 
-        wrapperHeight = 0,
-        thumbnails_template = $("#thumbnails_template").html();
+        thumbnails_template = $("#thumbnails_template").html(),
+
+        fitImageToWrapper,
+        showNextImage;
 
     $thumbnails.html(Mustache.render(thumbnails_template, { images: images }));
 
@@ -20,45 +23,65 @@ $(function () {
         evt.preventDefault();
     });
 
+    fitImageToWrapper = function () {
+        var nw = fullImage.naturalWidth,
+            nh = fullImage.naturalHeight,
+            ww = $imageWrapper.width(),
+            wh = $imageWrapper.height(),
+            scale,
+            sw,
+            constrainWidth = false;
+
+        scale = wh / nh;
+        sw = nw * scale;
+
+        if (sw > ww) {
+            constrainWidth = true;
+        }
+
+        $imageWrapper.toggleClass("constrainWidth", constrainWidth);
+    };
+
     $w.on("resize", function () {
-        wrapperHeight = $imageWrapper.height();
+        fitImageToWrapper();
     });
 
     $fullImage.on("load", function () {
-        var h = this.height;
-        $fullImage.toggleClass("wide", (this.width > h) && h < wrapperHeight);
+        fitImageToWrapper();
     });
 
-    $w.on("keyup", function (evt) {
+    showNextImage = function (back) {
         var $to;
 
-        switch (evt.keyCode) {
-        case 37:
-        case 38: // left
-            $to = $thumbnails.children(".selected").prev();
-            if (!$to.length) {
-                return;
-            }
+        $to = $thumbnails.children(".selected")[back ? "prev" : "next"]();
+        if (!$to.length) {
+            return;
+        }
 
-            $to.children().trigger("click");
+        $to.children().trigger("click");
+    };
+
+    $w.on("keyup", function (evt) {
+        switch (evt.keyCode) {
+        case 37: // up
+        case 38: // left
             evt.preventDefault();
             evt.stopPropagation();
+            showNextImage(true);
             break;
 
         case 39: // right
         case 40:
-            $to = $thumbnails.children(".selected").next();
-            if (!$to.length) {
-                return;
-            }
-
-            $to.children().trigger("click");
             evt.preventDefault();
             evt.stopPropagation();
+            showNextImage();
             break;
         }
     });
 
-    $w.trigger("resize");
+    $imageWrapper.on("click", "button", function () {
+        showNextImage($(this).data("back"));
+    });
+
     $thumbnails.children().first().children().trigger("click");
 });

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <title><%= title %> . photo.caer.me</title>
 
-    <link hrf='//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:300italic,300' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=PT+Serif:400,700,400italic|Open+Sans:300italic,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/gallery.css">
   </head>
@@ -17,7 +17,9 @@
 
       <ul id="thumbnails" class="thumbnails"></ul>
       <div id="image_wrapper">
+        <button id="prev_image" data-back="true">❮</button>
         <img id="full_image">
+        <button id="next_image">❯</button>
       </div>
 
       <script type="text/template" id="thumbnails_template">
@@ -31,10 +33,6 @@
 
     <script>
       var images = <%- images %>;
-      QuickSlideConfig = {
-        use_dimmer: true,
-        show_caption: true,
-      };
     </script>
     <script src="/js/lib/jquery-2.0.0.min.js"></script>
     <script src="/js/lib/mustache.js"></script>

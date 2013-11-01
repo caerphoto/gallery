@@ -162,11 +162,12 @@ ul.thumbnails {
     padding: 0;
     text-align: center;
     position: absolute;
-    top: 4em;
+    top: 5em;
     left: 0;
     bottom: 0;
     overflow-y: scroll;
     overflow-x: hidden;
+    font-size: 0.8em;
 }
 
 ul.thumbnails > li {
@@ -276,40 +277,43 @@ ul.thumbnails a:active img {
     height: 100%;
 }
 
-#full_image.wide {
+#image_wrapper.constrainWidth #full_image {
     width: 100%;
     height: auto;
 }
 
-#quickslide-dimmer {
-    background: rgba(0,0,0,0.7);
+#image_wrapper button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    position: absolute;
+    width: 100px;
+    top: 0;
+    bottom: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    transition: 0.2s;
+
+    color: rgba(255,255,255,0.4);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 2em;
 }
 
-#quickslide-popup-box {
-    padding: 1em;
-    background: #333;
-    border: 1px solid #000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    background-image: url("/media/loading-bar.gif");
-    background-repeat: no-repeat;
-    background-position: center;
+#image_wrapper button:hover {
+    color: #fff;
+    background: rgba(0,0,0,0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-#quickslide-popup-box.loading {
-    width: 128px;
-    height: 15px;
+#prev_image {
+    left: 0;
 }
 
-#quickslide-popup-box.loaded {
-    background-image: none;
+#next_image {
+    right: 0;
 }
-
-#quickslide-image {
-    border: 1px solid rgba(255,255,255, 0.1);
-}
-
-#quickslide-caption {
-    margin-top: 0.5em;
-    text-align: center;
-}
-
