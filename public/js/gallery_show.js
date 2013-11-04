@@ -10,20 +10,34 @@ $(function () {
 
         thumbnails_template = $("#thumbnails_template").html(),
 
+        loadImageFromHash,
         fitImageToWrapper,
         showNextImage;
 
     $thumbnails.html(Mustache.render(thumbnails_template, { images: images }));
 
     $thumbnails.on("click", "a[rel=quickslide]", function (evt) {
-        $fullImage.attr("src", this.href);
-        $thumbnails.children().removeClass("selected");
-        $(this).parent().addClass("selected");
-        $imageWrapper.addClass("loading");
-
+        window.location.hash = this.id;
 
         evt.preventDefault();
     });
+
+    loadImageFromHash = function () {
+        var h = window.location.hash,
+            $link;
+
+        if (!h || h === "#") {
+            return;
+        }
+
+        $link = $(h);
+        $fullImage.attr("src", $link.attr("href"));
+        $thumbnails.children().removeClass("selected");
+        $link.parent().addClass("selected");
+        $imageWrapper.addClass("loading");
+    };
+
+    $w.on("hashchange", loadImageFromHash);
 
     fitImageToWrapper = function () {
         var nw = fullImage.naturalWidth,
@@ -87,5 +101,11 @@ $(function () {
         showNextImage($(this).data("back"));
     });
 
-    $thumbnails.children().first().children().trigger("click");
+    (function (h) {
+        if (h && h !== "#") {
+            loadImageFromHash();
+        } else {
+            $thumbnails.children().first().children().trigger("click");
+        }
+    }(window.location.hash));
 });
