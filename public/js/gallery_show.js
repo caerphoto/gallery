@@ -17,7 +17,7 @@ $(function () {
     $thumbnails.html(Mustache.render(thumbnails_template, { images: images }));
 
     $thumbnails.on("click", "a[rel=quickslide]", function (evt) {
-        window.location.hash = this.id;
+        window.location.hash = $(this).data("hash");
 
         evt.preventDefault();
     });
@@ -30,7 +30,7 @@ $(function () {
             return;
         }
 
-        $link = $(h);
+        $link = $("#thumb_" + h.slice(1));
         $fullImage.attr("src", $link.attr("href"));
         $thumbnails.children().removeClass("selected");
         $link.parent().addClass("selected");
