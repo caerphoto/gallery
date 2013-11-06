@@ -15,6 +15,8 @@ var express = require("express"),
 
     redis = require("redis"),
     db = redis.createClient(),
+    RedisStore = require("connect-redis")(express),
+    sessionStore = new RedisStore(),
 
     controllers = {
         site: require("./controllers/site"),
@@ -30,7 +32,9 @@ app.set( "trust proxy", true );
 app.use( express.bodyParser({ uploadDir: "gallery_images/" }) );
 app.use( express.cookieParser() );
 app.use( express.session({
-    secret: "in the galleria"
+    secret: "in the galleria",
+    store: sessionStore,
+    key: "session:gallery"
 }) );
 
 // Per-gallery auth - galleries with no password don't show the auth dialog.
