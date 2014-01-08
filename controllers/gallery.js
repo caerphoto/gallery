@@ -64,6 +64,8 @@ exports.index = function( req, res ) {
                         private: !!gallery.password,
                         count: gallery.password ? null : gallery.count
                     };
+                }).filter(function( gallery ) {
+                    return !gallery.private;
                 });
 
                 if ( req.query.format === "json" ) {
