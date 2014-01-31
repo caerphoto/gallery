@@ -27,7 +27,11 @@ var express = require("express"),
 
     LISTEN_PORT = 3004;
 
-swig.setDefaults({ cache: false });
+if ( process.env.NODE_ENV !== "production" ){
+    swig.setDefaults({ cache: false });
+    console.log("View cache disabled.");
+}
+
 app.engine( "html", swig.renderFile );
 app.set( "view engine", "html" );
 app.set( "views", __dirname + "/views" );
