@@ -345,7 +345,7 @@ ul.thumbnails a:active img {
   transition: 0.2s;
 
   font-family: "Open Sans", sans-serif;
-  font-weight: normal;
+  font-weight: 600;
   font-size: 4em;
   color: rgba(255,255,255,0.4);
   text-shadow: 0 2px 4px rgba(0,0,0,0.1);
