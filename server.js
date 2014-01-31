@@ -2,6 +2,7 @@
 
 var express = require("express"),
     app = express(),
+    swig = require("swig"),
 
     ONE_HOUR = 1000 * 60 * 60 * 60,
     connectTimeout = require("connect-timeout"),
@@ -26,9 +27,12 @@ var express = require("express"),
 
     LISTEN_PORT = 3004;
 
+swig.setDefaults({ cache: false });
+app.engine( "html", swig.renderFile );
+app.set( "view engine", "html" );
 app.set( "views", __dirname + "/views" );
-app.set( "view engine", "ejs" );
 app.set( "trust proxy", true );
+
 app.use( express.bodyParser({ uploadDir: "gallery_images/" }) );
 app.use( express.cookieParser() );
 app.use( express.session({

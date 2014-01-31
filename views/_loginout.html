@@ -1,0 +1,16 @@
+<div class="logged-out">
+  <form id="login-form" action="/login" method="POST">
+    <label for="login-password">Password:</label>
+    <input id="login-password" name="password">
+
+    <input type="hidden" name="static_request" value="true">
+    <input type="submit" value="Log in" name="submit_button">
+  </form>
+</div>
+
+<div class="logged-in">
+  <form id="logout-form" action="/logout" method="POST">
+    <input type="hidden" name="static_request" value="true">
+    <input type="submit" value="Log out" name="submit_button">
+  </form>
+</div>

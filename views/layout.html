@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>{% block title %}photo{% endblock %} › andyf.me</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic|Open+Sans:300italic,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/gallery.css">
+  </head>
+
+  <body class="{% block bodyClass %}{% endblock %}">
+    <div id="main">
+    {% block content %}{% endblock %}
+    </div>
+
+    {% block js %}{% endblock %}
+  </body>
+</html>

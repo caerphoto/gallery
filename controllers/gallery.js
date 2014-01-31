@@ -202,18 +202,18 @@ exports.show = function( req, res, next ) {
                     return t1 < t2 ? -1 : t1 > t2 ? 1 : 0;
                 });
 
+                view = {
+                    title: gallery.title,
+                    category: gallery.category,
+                    edit_url: utils.getGalleryURL( gallery.title, true ),
+                    images: gallery_files
+                };
+
                 if ( /edit$/.test( req.path ) ) {
                     template = "gallery_edit";
                 } else {
                     template = "gallery";
                 }
-
-                view = {
-                    title: gallery.title,
-                    category: gallery.category,
-                    edit_url: utils.getGalleryURL( gallery.title, true ),
-                    images: JSON.stringify(gallery_files)
-                };
 
                 if ( req.query.format === "json" ) {
                     res.send( view );

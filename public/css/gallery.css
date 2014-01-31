@@ -1,344 +1,366 @@
 html {
-    background: #333;
-    height: 100%;
+  background: #333;
+  height: 100%;
 }
 
 body {
-    color: #eee;
+  color: #eee;
+}
+
+body.gallery {
+  overflow: hidden;
 }
 
 #main {
-    position: relative;
+  position: relative;
 }
 
-#main.gallery {
-    max-width: none;
-    margin: 0;
-    position: absolute;
-    top: 1em;
-    right: 0;
-    bottom: 0;
-    left: 1em;
+body.gallery #main {
+  max-width: none;
+  margin: 0;
+  position: absolute;
+  top: 1em;
+  right: 0;
+  bottom: 0;
+  left: 1em;
 }
 
 body.logged-in .logged-out,
 body.logged-out .logged-in {
-    display: none;
+  display: none;
 }
 
 h1 {
-    color: #ddd;
-    text-shadow:
-        0 -1px 0 #444,
-        0 -2px 3px rgba(255,255,255, 0.2);
+  color: #ddd;
+  text-shadow:
+    0 -1px 0 #444,
+    0 -2px 3px rgba(255,255,255, 0.2);
 }
 
 .gallery h1 {
-    margin: 0 0 1.8em;
-    padding: 0;
-    background: none;
+  margin: 0 0 1.8em;
+  padding: 0;
+  background: none;
 }
 
 a {
-    color: #abc;
-    text-decoration: none;
+  color: #abc;
+  text-decoration: none;
 }
 
 a:visited {
-    color: #89a;
+  color: #89a;
 }
 
 a:hover {
-    color: #def;
+  color: #def;
 }
 
 input {
-    font: inherit;
-    font-size: 100%;
+  font: inherit;
+  font-size: 100%;
+}
+
+button,
+input[type="submit"] {
+  color: #333;
 }
 
 a.admin-function {
-    position: absolute;
-    top: 1em;
-    right: 3em;
+  position: absolute;
+  top: 1em;
+  right: 3em;
 }
 
 li:before {
-    content: "";
+  content: "";
 }
 
 ul.gallery-list > li {
-    padding-left: 20px;
-    list-style: none;
+  padding-left: 20px;
+  list-style: none;
 }
 
 ul.gallery-list > li.private {
-    background-image: url("/media/padlock-icon.png");
-    background-position: left;
-    background-repeat: no-repeat;
+  background-image: url("/media/padlock-icon.png");
+  background-position: left;
+  background-repeat: no-repeat;
 }
 
 form {
-    overflow: hidden;
-    margin-bottom: 1em;
+  overflow: hidden;
+  margin-bottom: 1em;
 }
 
 form label,
 form input,
 form .hint {
-    display: block;
-    float: left;
-    margin-bottom: 1em;
-    padding: 0.2em 0.5em;
-    line-height: 1.25;
-    border: none;
-    vertical-align: middle;
+  display: block;
+  float: left;
+  margin-bottom: 1em;
+  padding: 0.2em 0.5em;
+  line-height: 1.25;
+  border: none;
+  vertical-align: middle;
 }
 
 form label {
-    width: 6em;
-    clear: both;
+  width: 6em;
+  clear: both;
 }
 
 form input[type="text"],
 form input[type="password"] {
-    border-radius: 3px;
-    box-shadow:
-        inset 1px 1px 2px rgba(0,0,0, 0.2);
+  border-radius: 3px;
+  box-shadow:
+    inset 1px 1px 2px rgba(0,0,0, 0.2);
 }
 
 #upload-form input[type="text"],
 #upload-form input[type="password"] {
-    width: 15em;
+  width: 15em;
 }
 
 form .hint {
-    margin-left: 1em;
-    font-size: 80%;
+  margin-left: 1em;
+  font-size: 80%;
 }
 
 input[type="submit"],
 button,
 a.button {
-    clear: both;
-    border-radius: 4px;
-    background: #eee;
-    box-shadow:
-        inset 1px 1px 0 #fff,
-        inset -1px -1px 1px rgba(0,0,0,0.3),
-              0 1px 2px -2px rgba(0,0,0,0.4);
-    border-width: 1px;
-    border-style: solid;
-    border-color: #bbb #000 #000 #bbb;
+  clear: both;
+  border-radius: 4px;
+  background: #eee;
+  box-shadow:
+    inset 1px 1px 0 #fff,
+    inset -1px -1px 1px rgba(0,0,0,0.3),
+    0 1px 2px -2px rgba(0,0,0,0.4);
+  border-width: 1px;
+  border-style: solid;
+  border-color: #bbb #000 #000 #bbb;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 input[type="submit"]:hover,
 button:hover,
 a.button:hover {
-    background: #fff;
+  background: #fff;
 }
 
 #upload-status {
-    line-height: 2;
+  line-height: 2;
 }
 
 #upload-progress-bar {
-    width: 20em;
-    margin-right: 1em;
+  width: 20em;
+  margin-right: 1em;
 }
 
 .error {
-    color: #ef2222;
+  color: #ef2222;
 }
 
 .success {
-    color: #22c022;
+  color: #22c022;
 }
 
 ul.thumbnails {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    position: absolute;
-    top: 5em;
-    left: 0;
-    bottom: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    font-size: 0.8em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 0.8em;
+  overflow: hidden;
+}
+
+body.gallery ul.thumbnails {
+  position: absolute;
+  top: 5em;
+  left: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 ul.thumbnails > li {
-    display: block;
-    overflow: hidden;
-    list-style: none;
-    max-width: 202px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  max-width: 202px;
 
-    padding: 0;
-    padding-top: 1em;
-    padding-bottom: 0.5em;
+  padding: 0;
+  padding-top: 1em;
+  padding-bottom: 0.5em;
 
-    border-bottom: 1px solid rgba(255,255,255, 0.2);
+  border-bottom: 1px solid rgba(255,255,255, 0.2);
 
-    margin: 0 1em 0 0;
+  margin: 0 1em 0 0;
 
-    text-align: center;
+  text-align: center;
 }
 
-ul.thumbnails > li:first-child {
-    padding-top: 0;
+body.edit ul.thumbnails > li {
+  position: relative;
+  float: left;
+  min-height: 247px;
+  border: none;
+}
+
+body.gallery ul.thumbnails > li:first-child {
+  padding-top: 0;
 }
 
 ul.thumbnails > li.selected {
-    background: rgba(255,255,255, 0.2);
+  background: rgba(255,255,255, 0.2);
 }
 
 ul.thumbnails input[type="checkbox"] {
-    display: none;
+  display: none;
 }
 
 ul.thumbnails input[type="checkbox"] + label {
-    display: block;
-    position: absolute;
-    z-index: 2;
-    top: 0.5em;
-    right: 0.5em;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0;
-    width: 1.2em;
-    height: 1.2em;
-    cursor: pointer;
-    background: rgba(64,0,0, 0.6);
-    box-shadow: 0 2px 3px rgba(0,0,0, 0.4);
-    border: 1px solid rgba(0,0,0,0.4);
-    border-radius: 3px;
+  display: block;
+  position: absolute;
+  z-index: 2;
+  top: 0.5em;
+  right: 0.5em;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  width: 1.2em;
+  height: 1.2em;
+  cursor: pointer;
+  background: rgba(64,0,0, 0.6);
+  box-shadow: 0 2px 3px rgba(0,0,0, 0.4);
+  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 3px;
 }
 
 ul.thumbnails input[type="checkbox"]:checked + label {
-    background: rgba( 80, 0, 0, 0.9 );
+  background: rgba( 80, 0, 0, 0.9 );
 }
 
 ul.thumbnails input[type="checkbox"] + label:hover {
-    background: rgba( 80, 0, 0, 0.9 );
+  background: rgba( 80, 0, 0, 0.9 );
 }
 
 ul.thumbnails input[type="checkbox"] + label:before {
-    content: "";
+  content: "";
 }
 
 ul.thumbnails input[type="checkbox"]:checked + label:before {
-    content: "✗";
-    font-weight: bold;
-    color: #f00;
+  content: "✗";
+  font-weight: bold;
+  color: #f00;
 }
 
 ul.thumbnails input[type="checkbox"]:checked + label + img {
-    background: #000;
-    opacity: 0.3;
+  background: #000;
+  opacity: 0.3;
 }
 
 ul.thumbnails > li img {
-    display: block;
-    margin: 0 auto 0.5em;
-    box-shadow: 0 4px 7px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255, 0.1);
+  display: block;
+  margin: 0 auto 0.5em;
+  box-shadow: 0 4px 7px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255, 0.1);
 }
 
 ul.thumbnails a:hover img {
-    border: 1px solid rgba(255,255,255, 0.4);
+  border: 1px solid rgba(255,255,255, 0.4);
 }
 
 ul.thumbnails a:active img {
-    top: 2px;
-    box-shadow: 0 2px 7px rgba(0,0,0,0.3);
+  top: 2px;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.3);
 }
 
 #image_wrapper {
-    display: block;
-    position: absolute;
-    top: 4em;
-    right: 1em;
-    bottom: 1em;
-    left: 240px;
-    padding-left: 1em;
+  display: block;
+  position: absolute;
+  top: 4em;
+  right: 1em;
+  bottom: 1em;
+  left: 240px;
+  padding-left: 1em;
 
-    overflow: hidden;
+  overflow: hidden;
 
-    text-align: center;
+  text-align: center;
 }
 
 #image_wrapper:after {
-    display: block;
-    content: " ";
-    opacity: 0;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -69px;
-    margin-top: -12px;
-    background-image: url("/media/loading-bar.gif");
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 128px;
-    height: 15px;
-    padding: 10px;
-    border: 1px solid rgba(0,0,0,0.4);
-    background-color: rgba(0,0,0, 0.2);
-    transition: 0.2s;
+  display: block;
+  content: " ";
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -69px;
+  margin-top: -12px;
+  background-image: url("/media/loading-bar.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 128px;
+  height: 15px;
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0, 0.2);
+  transition: 0.2s;
 }
 
 #image_wrapper.loading:after {
-    opacity: 1;
+  opacity: 1;
 }
 
 
 #full_image {
-    width: auto;
-    height: 100%;
+  width: auto;
+  height: 100%;
 }
 
 #image_wrapper.constrainWidth #full_image {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 #image_wrapper button {
-    -webkit-appearance: none;
-    appearance: none;
-    display: block;
-    position: absolute;
-    width: 100px;
-    top: 0;
-    bottom: 0;
-    background: none;
-    border: none;
-    border-radius: 0;
-    outline: none;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    transition: 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  position: absolute;
+  width: 100px;
+  top: 0;
+  bottom: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  transition: 0.2s;
 
-    font: inherit;
-    color: rgba(255,255,255,0.4);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    font-size: 4em;
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-size: 4em;
+  color: rgba(255,255,255,0.4);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 #image_wrapper button:hover {
-    color: #fff;
-    background: rgba(0,0,0,0.3);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  color: #fff;
+  background: rgba(0,0,0,0.3);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 #prev_image {
-    left: 0.25em;
+  left: 0.25em;
 }
 
 #next_image {
-    right: 0;
+  right: 0;
 }

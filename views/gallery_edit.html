@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}edit: {{ title }}{% endblock %}
+
+{% block bodyClass %}edit{% endblock %}
+
+{% block content %}
+<a href="/">&larr; Gallery index</a>
+
+<h1>Edit gallery: {{ title }}</h1>
+
+<form action="/gallery/{{ title }}/update" method="POST">
+  <ul class="thumbnails">
+    {% for f in images %}
+    <li class="edit">
+      <input type="checkbox" id="delete-{{ f.filename }}"
+        name="{{ f.filename }}[deleted]">
+      <label for="delete-{{ f.filename }}"></label>
+
+      <img src="{{ f.thumb_url }}">
+
+      <input type="text" name="{{ f.filename }}[title]" value="{{ f.title }}">
+    </li>
+    {% endfor %}
+  </ul>
+
+  <input type="submit" value="Save">
+</form>
+{% endblock %}

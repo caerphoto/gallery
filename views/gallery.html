@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block bodyClass %}gallery{% endblock %}
+
+{% block content %}
+<a href="{{ edit_url }}" class="admin-function">edit gallery</a>
+
+<h1 class="page-title"><a href="http://andyf.me/">andyf.me</a> › <a href="/">photo</a> › {{ title }}</h1>
+
+<ul id="thumbnails" class="thumbnails"></ul>
+<div id="image_wrapper">
+  <button id="prev_image" data-back="true">‹</button>
+  <img id="full_image">
+  <button id="next_image">›</button>
+</div>
+
+<script type="text/mustache_template" id="thumbnails_template">
+  {%- raw -%}
+  {{#images}}
+  <li><a href="/gallery_image/{{ filename }}.jpg" rel="quickslide"
+    title="{{ title }}" id="thumb_{{ filename }}" data-hash="{{ filename }}"><img src="{{ thumb_url }}">{{title}}</a></li>
+  {{/images}}
+  {%- endraw -%}
+</script>
+
+<script>
+var images = {{ images|json|safe }};
+</script>
+{% endblock %}
+
+{% block js %}
+<script src="/js/lib/jquery-2.0.0.min.js"></script>
+<script src="/js/lib/mustache.js"></script>
+<script src="/js/gallery_show.js"></script>
+{% endblock %}
